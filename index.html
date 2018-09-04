@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>单文件上传</title>
+   
+    
+    <style type="text/css">
+        .newjk-backpop{
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #000;
+            display: block;
+            z-index: 1030;
+            overflow: hidden;
+            position: absolute;
+        }
+        .newjk-container{
+            position: relative;
+            height: 100%;
+        }
+        .newjk-container>img,.newjk-container>video{
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<h1>单文件上传</h1>
+<form id="form1" enctype="multipart/form-data" method="post" action="./upload.php">
+    <div class="row">
+        <input type="file" name="fileToUpload" id="fileToUpload" multiple="multiple" />
+        
+        <label for="fileToUpload">Select a File to Upload</label><br />
+    </div>
+
+    <div id="fileName"></div>
+    <div id="fileSize"></div>
+    <div id="fileType"></div>
+    <div class="row">
+        <input type="button" onclick="uploadFile()" value="Upload" />
+    </div>
+    <div id="progressNumber"></div>
+</form>
+<!-- <div id="newjk_previewImg" class="newjk-backpop">
+    <div class="newjk-container" >
+        <video src="heng.mp4"  controls="controls" autoplay="autoplay">
+            您的浏览器暂不支持视频播放！
+        </video>
+    </div>
+</div> -->
+<script type="text/javascript">document.write('<script type="text/javascript" src="uploadFile.js?v=' + Date.now()+ '"><\/script>');</script>
+<script type="text/javascript">
+    var upObj = new UpLoadFile({
+        id: 'fileToUpload',
+        url: 'upload.php',
+        type:'*',
+        limit:2,
+        size:100,
+        autoupload:false,
+        changeFun: function(res){
+            console.log('选中文件');
+            console.log(res);
+        },
+        errFileFun: function(res){
+            console.log(res);
+        },
+        sucFun: function(res){
+            console.log('suc');
+            console.log(res);
+        },
+        errFun: function(res){
+            console.log('err');
+            console.log(res);
+        },
+        progressFun: function(res){
+            console.log('进度条');
+            console.log(res);
+        }
+        
+    });
+    
+</script>
+</body>
+</html>
